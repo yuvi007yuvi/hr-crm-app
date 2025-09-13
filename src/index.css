@@ -48,3 +48,35 @@ body {
 .MuiDrawer-paper {
   border-right: 1px solid rgba(0, 0, 0, 0.12) !important;
 }
+
+/* Heart animation for footer */
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.2);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.2);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+.heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+/* Footer styling */
+.footer-link {
+  transition: color 0.2s ease-in-out;
+}
+
+.footer-link:hover {
+  color: #1976d2 !important;
+}

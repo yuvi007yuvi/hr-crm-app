@@ -3,7 +3,10 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-  updateProfile
+  updateProfile,
+  updatePassword as firebaseUpdatePassword,
+  reauthenticateWithCredential,
+  EmailAuthProvider
 } from 'firebase/auth';
 import { 
   doc, 
@@ -88,6 +91,54 @@ export const authService = {
       }
     } catch (error) {
       console.error('Get user data error:', error);
+      return { error: error.message, success: false };
+    }
+  },
+
+  // Update user profile
+  async updateProfile(uid, profileData) {
+    try {
+      // Update Firestore document
+      await updateDoc(doc(db, COLLECTIONS.USERS, uid), {
+        ...profileData,
+        updatedAt: new Date().toISOString()
+      });
+      
+      // Update Firebase Auth profile if name or email changed
+      if (profileData.firstName || profileData.lastName) {
+        const user = auth.currentUser;
+        if (user) {
+          await updateProfile(user, {
+            displayName: `${profileData.firstName || ''} ${profileData.lastName || ''}`.trim()
+          });
+        }
+      }
+      
+      return { success: true };
+    } catch (error) {
+      console.error('Update profile error:', error);
+      return { error: error.message, success: false };
+    }
+  },
+
+  // Update password
+  async updatePassword(currentPassword, newPassword) {
+    try {
+      const user = auth.currentUser;
+      if (!user) {
+        return { error: 'No user logged in', success: false };
+      }
+      
+      // Re-authenticate user
+      const credential = EmailAuthProvider.credential(user.email, currentPassword);
+      await reauthenticateWithCredential(user, credential);
+      
+      // Update password
+      await firebaseUpdatePassword(user, newPassword);
+      
+      return { success: true };
+    } catch (error) {
+      console.error('Update password error:', error);
       return { error: error.message, success: false };
     }
   },

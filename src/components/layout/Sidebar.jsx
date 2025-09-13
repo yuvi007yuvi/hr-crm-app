@@ -24,7 +24,8 @@ import {
   Person as PersonIcon,
   Assignment as AssignmentIcon,
   Timeline as TimelineIcon,
-  Groups as TeamsIcon
+  Groups as TeamsIcon,
+  AccountBox as ProfileIcon
 } from '@mui/icons-material';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
@@ -194,6 +195,17 @@ const Sidebar = ({ open, onClose, variant = 'temporary' }) => {
       }
     ];
 
+    const profileItems = [
+      {
+        id: 'profile',
+        label: 'My Profile',
+        icon: <ProfileIcon />,
+        path: ROUTES.PROFILE,
+        pageId: PAGES.PROFILE,
+        roles: [USER_ROLES.ADMIN, USER_ROLES.MANAGER, USER_ROLES.EMPLOYEE]
+      }
+    ];
+
     // Helper function to filter items by role, module, and page access
     const filterItems = (items) => {
       return items.filter(item => {
@@ -254,6 +266,9 @@ const Sidebar = ({ open, onClose, variant = 'temporary' }) => {
     if (hasPermission(USER_ROLES.ADMIN)) {
       items = [...items, ...filterItems(settingsItems)];
     }
+    
+    // Add profile items for all users
+    items = [...items, ...filterItems(profileItems)];
     
     return items;
   };

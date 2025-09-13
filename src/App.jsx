@@ -26,6 +26,7 @@ import LeaveRequests from './pages/LeaveRequests.jsx';
 import Attendance from './pages/Attendance.jsx';
 import Analytics from './pages/Analytics.jsx';
 import Settings from './pages/Settings.jsx';
+import Profile from './pages/Profile.jsx';
 
 // Constants
 import { ROUTES, USER_ROLES } from './constants/index.js';
@@ -224,6 +225,18 @@ const App = () => {
                         <ProtectedRoute requiredRole={USER_ROLES.MANAGER}>
                           <Layout title="Settings">
                             <Settings />
+                          </Layout>
+                        </ProtectedRoute>
+                      } 
+                    />
+                    
+                    {/* Profile Route */}
+                    <Route 
+                      path="/profile" 
+                      element={
+                        <ProtectedRoute>
+                          <Layout title="My Profile">
+                            <Profile />
                           </Layout>
                         </ProtectedRoute>
                       } 

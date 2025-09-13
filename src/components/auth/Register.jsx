@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {
   Container,
@@ -17,6 +16,7 @@ import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { FormField, LoadingSpinner } from '../common/index.js';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { ROUTES, USER_ROLES, DEPARTMENTS } from '../../constants/index.js';
+import Footer from '../layout/Footer.jsx';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -123,15 +123,16 @@ const Register = () => {
   ];
 
   return (
-    <Container component="main" maxWidth="md" className="min-h-screen flex items-center justify-center py-12">
-      <Paper 
-        elevation={3} 
-        className="w-full p-8 rounded-lg"
-        sx={{ 
-          boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
-          borderRadius: 3
-        }}
-      >
+    <Box className="min-h-screen flex flex-col bg-gray-50">
+      <Container component="main" maxWidth="md" className="flex-1 flex items-center justify-center py-12">
+        <Paper 
+          elevation={3} 
+          className="w-full p-8 rounded-lg"
+          sx={{ 
+            boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
+            borderRadius: 3
+          }}
+        >
         <Box className="text-center mb-8">
           <Box className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
             <PersonAddIcon className="text-green-600" fontSize="large" />
@@ -281,6 +282,10 @@ const Register = () => {
         </Box>
       </Paper>
     </Container>
+    
+    {/* Footer */}
+    <Footer />
+  </Box>
   );
 };
 

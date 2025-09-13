@@ -155,6 +155,50 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const updateProfile = async (profileData) => {
+    try {
+      setLoading(true);
+      clearError();
+      
+      const result = await authService.updateProfile(state.user.uid, profileData);
+      
+      if (result.success) {
+        // Update local state
+        setUserData({ ...state.userData, ...profileData });
+        return { success: true };
+      } else {
+        setError(result.error);
+        return { success: false, error: result.error };
+      }
+    } catch (error) {
+      setError(error.message);
+      return { success: false, error: error.message };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updatePassword = async (currentPassword, newPassword) => {
+    try {
+      setLoading(true);
+      clearError();
+      
+      const result = await authService.updatePassword(currentPassword, newPassword);
+      
+      if (result.success) {
+        return { success: true };
+      } else {
+        setError(result.error);
+        return { success: false, error: result.error };
+      }
+    } catch (error) {
+      setError(error.message);
+      return { success: false, error: error.message };
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Check if user has specific role
   const hasRole = (role) => {
     return state.userData?.role === role;
@@ -194,6 +238,8 @@ export const AuthProvider = ({ children }) => {
     login,
     register,
     logout,
+    updateProfile,
+    updatePassword,
     clearError,
     hasRole,
     hasPermission

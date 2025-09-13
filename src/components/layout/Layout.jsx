@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import Header from './Header.jsx';
 import Sidebar from './Sidebar.jsx';
+import Footer from './Footer.jsx';
 
 const Layout = ({ children, title }) => {
   const theme = useTheme();
@@ -46,7 +47,7 @@ const Layout = ({ children, title }) => {
 
         {/* Page content - Scrollable */}
         <Box
-          className="flex-1 p-4"
+          className="flex-1 flex flex-col"
           sx={{
             overflow: 'auto',
             height: 'calc(100vh - 64px)', // Full height minus header
@@ -69,7 +70,13 @@ const Layout = ({ children, title }) => {
             scrollbarColor: '#c1c1c1 #f1f1f1',
           }}
         >
-          {children}
+          {/* Main content area */}
+          <Box className="flex-1 p-4">
+            {children}
+          </Box>
+          
+          {/* Footer */}
+          <Footer />
         </Box>
       </Box>
     </Box>

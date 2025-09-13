@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -34,6 +35,7 @@ import { useNotification, NOTIFICATION_TYPES } from '../../context/NotificationC
 
 const Header = ({ onMenuClick, title = 'HR CRM' }) => {
   const { user, userData, logout } = useAuth();
+  const navigate = useNavigate();
   const { 
     notifications, 
     unreadCount, 
@@ -99,6 +101,11 @@ const Header = ({ onMenuClick, title = 'HR CRM' }) => {
   const handleCreateTestNotification = () => {
     createTestNotification();
     handleNotificationClose();
+  };
+
+  const handleProfileClick = () => {
+    navigate('/profile');
+    handleMenuClose();
   };
 
   const getNotificationIcon = (type) => {
@@ -278,7 +285,7 @@ const Header = ({ onMenuClick, title = 'HR CRM' }) => {
           </Typography>
         </Box>
         <Divider />
-        <MenuItem onClick={handleMenuClose} className="py-2">
+        <MenuItem onClick={handleProfileClick} className="py-2">
           <AccountCircle className="mr-2" fontSize="small" />
           Profile
         </MenuItem>
