@@ -100,7 +100,7 @@ const Login = () => {
               Welcome Back
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              Sign in to your HR CRM account
+              Sign in to your HRNova account
             </Typography>
           </Box>
 

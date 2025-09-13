@@ -24,7 +24,7 @@ const Footer = () => {
             color="text.secondary"
             className="text-center sm:text-left"
           >
-            © {currentYear} HR CRM. All rights reserved.
+            © {currentYear} HRNova. All rights reserved.
           </Typography>
           
           {/* Made with love by YUVRAJ */}
@@ -70,7 +70,7 @@ const Footer = () => {
             color="text.secondary"
             className="text-xs"
           >
-            Human Resources Customer Relationship Management System
+            Next-Generation Human Resources Management System
           </Typography>
         </Box>
       </Box>

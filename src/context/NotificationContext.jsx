@@ -351,14 +351,14 @@ export const NotificationProvider = ({ children }) => {
 
   const createWelcomeNotification = useCallback((userRole) => {
     const roleMessages = {
-      admin: 'Welcome to HR CRM! You have full administrative access to manage employees, leaves, and system settings.',
-      manager: 'Welcome to HR CRM! You can manage your team, review leave requests, and access analytics.',
-      employee: 'Welcome to HR CRM! You can mark attendance, apply for leaves, and view your profile.'
+      admin: 'Welcome to HRNova! You have full administrative access to manage employees, leaves, and system settings.',
+      manager: 'Welcome to HRNova! You can manage your team, review leave requests, and access analytics.',
+      employee: 'Welcome to HRNova! You can mark attendance, apply for leaves, and view your profile.'
     };
     
     return createNotification({
       type: NOTIFICATION_TYPES.SYSTEM_ANNOUNCEMENT,
-      title: 'Welcome to HR CRM',
+      title: 'Welcome to HRNova',
       message: roleMessages[userRole] || roleMessages.employee,
       priority: NOTIFICATION_PRIORITIES.MEDIUM,
       actionUrl: '/dashboard'

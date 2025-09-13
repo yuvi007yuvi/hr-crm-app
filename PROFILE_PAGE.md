@@ -1,7 +1,7 @@
 # User Profile Page
 
 ## Overview
-The User Profile page provides a comprehensive interface for users to view and manage their personal information, work details, security settings, and preferences within the HR CRM system.
+The User Profile page provides a comprehensive interface for users to view and manage their personal information, work details, security settings, and preferences within the HRNova system.
 
 ## Features
 

@@ -33,7 +33,7 @@ import {
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useNotification, NOTIFICATION_TYPES } from '../../context/NotificationContext.jsx';
 
-const Header = ({ onMenuClick, title = 'HR CRM' }) => {
+const Header = ({ onMenuClick, title = 'HRNova' }) => {
   const { user, userData, logout } = useAuth();
   const navigate = useNavigate();
   const { 

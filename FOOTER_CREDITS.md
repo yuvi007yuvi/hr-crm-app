@@ -1,7 +1,7 @@
 # Footer Credits Implementation
 
 ## Overview
-Added a comprehensive footer with credits "Made with 💖 by YUVRAJ" and "All rights reserved" to every page of the HR CRM application.
+Added a comprehensive footer with credits "Made with 💖 by YUVRAJ" and "All rights reserved" to every page of the HRNova application.
 
 ## Implementation Details
 
@@ -61,7 +61,7 @@ Added a comprehensive footer with credits "Made with 💖 by YUVRAJ" and "All ri
     <Divider sx={{ mb: 2 }} />
     <Box className="flex flex-col sm:flex-row items-center justify-between">
       {/* Copyright */}
-      <Typography>© {currentYear} HR CRM. All rights reserved.</Typography>
+      <Typography>© {currentYear} HRNova. All rights reserved.</Typography>
       
       {/* Credits */}
       <Box className="flex items-center space-x-1">
@@ -182,7 +182,7 @@ Automatically updates copyright year
 
 #### Footer Content
 ```
-© 2024 HR CRM. All rights reserved.
+© 2024 HRNova. All rights reserved.
 Made with 💖 by YUVRAJ
 Human Resources Customer Relationship Management System
 ```
@@ -191,7 +191,7 @@ Human Resources Customer Relationship Management System
 
 #### Easy Updates
 - **Creator Name**: Change YUVRAJ to any name
-- **Company Name**: Update "HR CRM" 
+- **Company Name**: Update "HRNova" 
 - **Animation**: Modify heartbeat timing/style
 - **Colors**: Adjust color scheme
 
@@ -203,7 +203,7 @@ Human Resources Customer Relationship Management System
 
 ## 🎉 Success!
 
-The footer with credits has been successfully implemented across all pages of the HR CRM application, ensuring that:
+The footer with credits has been successfully implemented across all pages of the HRNova application, ensuring that:
 
 - ✅ **"All rights reserved"** notice appears on every page
 - ✅ **"Made with 💖 by YUVRAJ"** credits are visible everywhere

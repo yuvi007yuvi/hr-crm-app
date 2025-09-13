@@ -360,7 +360,7 @@ const Sidebar = ({ open, onClose, variant = 'temporary' }) => {
           </Avatar>
           <Box>
             <Typography variant="h6" className="font-bold text-gray-800">
-              HR CRM
+              HRNova
             </Typography>
             <Typography variant="caption" color="text.secondary">
               Human Resources

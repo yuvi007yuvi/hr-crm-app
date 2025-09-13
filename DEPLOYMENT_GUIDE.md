@@ -67,7 +67,7 @@ VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
 VITE_FIREBASE_APP_ID=your_app_id
 
 # App Configuration
-VITE_APP_NAME=HR CRM
+VITE_APP_NAME=HRNova
 VITE_APP_VERSION=1.0.0
 ```
 
@@ -219,7 +219,7 @@ After successful deployment:
 
 ## 🎉 Success!
 
-After following these steps, your HR CRM application should:
+After following these steps, your HRNova application should:
 - ✅ Load correctly on all routes
 - ✅ Handle page refreshes without 404 errors
 - ✅ Work seamlessly with React Router

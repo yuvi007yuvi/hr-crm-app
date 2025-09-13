@@ -1,7 +1,7 @@
 # Notification Sound System
 
 ## Overview
-The HR CRM application now includes a comprehensive notification sound system that plays different audio tones for different types of notifications.
+The HRNova application now includes a comprehensive notification sound system that plays different audio tones for different types of notifications.
 
 ## Features
 

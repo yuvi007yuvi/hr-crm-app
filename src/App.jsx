@@ -119,7 +119,7 @@ const App = () => {
                       path={ROUTES.DASHBOARD} 
                       element={
                         <ProtectedRoute>
-                          <Layout title="Dashboard">
+                          <Layout title="HRNova Dashboard">
                             <Dashboard />
                           </Layout>
                         </ProtectedRoute>
@@ -130,7 +130,7 @@ const App = () => {
                       path={ROUTES.EMPLOYEES} 
                       element={
                         <ProtectedRoute requiredRole={USER_ROLES.MANAGER}>
-                          <Layout title="Employee Directory">
+                          <Layout title="HRNova - Employee Directory">
                             <EmployeeDirectory />
                           </Layout>
                         </ProtectedRoute>
@@ -142,7 +142,7 @@ const App = () => {
                       path={ROUTES.MY_TEAM} 
                       element={
                         <ProtectedRoute requiredRole={USER_ROLES.MANAGER}>
-                          <Layout title="My Team">
+                          <Layout title="HRNova - My Team">
                             <MyTeam />
                           </Layout>
                         </ProtectedRoute>
@@ -154,7 +154,7 @@ const App = () => {
                       path={`${ROUTES.EMPLOYEES}/add`} 
                       element={
                         <ProtectedRoute requiredRole={USER_ROLES.MANAGER}>
-                          <Layout title="Add Employee">
+                          <Layout title="HRNova - Add Employee">
                             <EmployeeDirectory />
                           </Layout>
                         </ProtectedRoute>
@@ -165,7 +165,7 @@ const App = () => {
                       path={ROUTES.LEAVE_REQUESTS} 
                       element={
                         <ProtectedRoute>
-                          <Layout title="Leave Management">
+                          <Layout title="HRNova - Leave Management">
                             <LeaveRequests />
                           </Layout>
                         </ProtectedRoute>
@@ -177,7 +177,7 @@ const App = () => {
                       path={`${ROUTES.LEAVE_REQUESTS}/apply`} 
                       element={
                         <ProtectedRoute>
-                          <Layout title="Apply Leave">
+                          <Layout title="HRNova - Apply Leave">
                             <LeaveRequests />
                           </Layout>
                         </ProtectedRoute>
@@ -188,7 +188,7 @@ const App = () => {
                       path={ROUTES.ATTENDANCE} 
                       element={
                         <ProtectedRoute>
-                          <Layout title="Attendance">
+                          <Layout title="HRNova - Attendance">
                             <Attendance />
                           </Layout>
                         </ProtectedRoute>
@@ -200,7 +200,7 @@ const App = () => {
                       path={`${ROUTES.ATTENDANCE}/mark`} 
                       element={
                         <ProtectedRoute>
-                          <Layout title="Mark Attendance">
+                          <Layout title="HRNova - Mark Attendance">
                             <Attendance />
                           </Layout>
                         </ProtectedRoute>
@@ -211,7 +211,7 @@ const App = () => {
                       path={ROUTES.ANALYTICS} 
                       element={
                         <ProtectedRoute requiredRole={USER_ROLES.MANAGER}>
-                          <Layout title="Analytics & Reports">
+                          <Layout title="HRNova - Analytics & Reports">
                             <Analytics />
                           </Layout>
                         </ProtectedRoute>
@@ -223,7 +223,7 @@ const App = () => {
                       path="/settings" 
                       element={
                         <ProtectedRoute requiredRole={USER_ROLES.MANAGER}>
-                          <Layout title="Settings">
+                          <Layout title="HRNova - Settings">
                             <Settings />
                           </Layout>
                         </ProtectedRoute>
@@ -235,7 +235,7 @@ const App = () => {
                       path="/profile" 
                       element={
                         <ProtectedRoute>
-                          <Layout title="My Profile">
+                          <Layout title="HRNova - My Profile">
                             <Profile />
                           </Layout>
                         </ProtectedRoute>
@@ -249,7 +249,7 @@ const App = () => {
                     <Route 
                       path="*" 
                       element={
-                        <Layout title="Page Not Found">
+                        <Layout title="HRNova - Page Not Found">
                           <div className="text-center py-16">
                             <h1 className="text-4xl font-bold text-gray-800 mb-4">404</h1>
                             <p className="text-gray-600 mb-8">Page not found</p>

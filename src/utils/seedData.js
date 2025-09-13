@@ -7,7 +7,7 @@ const seedEmployees = [
     uid: 'admin-1',
     firstName: 'Admin',
     lastName: 'User',
-    email: 'admin@hrcrm.com',
+    email: 'admin@hrnova.com',
     role: USER_ROLES.ADMIN,
     department: DEPARTMENTS[3], // HR
     designation: 'HR Director',
@@ -18,7 +18,7 @@ const seedEmployees = [
     uid: 'manager-1',
     firstName: 'John',
     lastName: 'Manager',
-    email: 'john.manager@hrcrm.com',
+    email: 'john.manager@hrnova.com',
     role: USER_ROLES.MANAGER,
     department: DEPARTMENTS[0], // Engineering
     designation: 'Engineering Manager',
@@ -29,7 +29,7 @@ const seedEmployees = [
     uid: 'employee-1',
     firstName: 'Jane',
     lastName: 'Smith',
-    email: 'jane.smith@hrcrm.com',
+    email: 'jane.smith@hrnova.com',
     role: USER_ROLES.EMPLOYEE,
     department: DEPARTMENTS[0], // Engineering
     designation: 'Senior Software Engineer',
@@ -40,7 +40,7 @@ const seedEmployees = [
     uid: 'employee-2',
     firstName: 'Mike',
     lastName: 'Johnson',
-    email: 'mike.johnson@hrcrm.com',
+    email: 'mike.johnson@hrnova.com',
     role: USER_ROLES.EMPLOYEE,
     department: DEPARTMENTS[1], // Marketing
     designation: 'Marketing Executive',
@@ -51,7 +51,7 @@ const seedEmployees = [
     uid: 'employee-3',
     firstName: 'Sarah',
     lastName: 'Davis',
-    email: 'sarah.davis@hrcrm.com',
+    email: 'sarah.davis@hrnova.com',
     role: USER_ROLES.EMPLOYEE,
     department: DEPARTMENTS[6], // Design
     designation: 'UI/UX Designer',
@@ -64,7 +64,7 @@ const seedLeaves = [
   {
     employeeId: 'employee-1',
     employeeName: 'Jane Smith',
-    employeeEmail: 'jane.smith@hrcrm.com',
+    employeeEmail: 'jane.smith@hrnova.com',
     department: DEPARTMENTS[0],
     type: LEAVE_TYPES.SICK,
     startDate: '2024-01-15',
@@ -79,7 +79,7 @@ const seedLeaves = [
   {
     employeeId: 'employee-2',
     employeeName: 'Mike Johnson',
-    employeeEmail: 'mike.johnson@hrcrm.com',
+    employeeEmail: 'mike.johnson@hrnova.com',
     department: DEPARTMENTS[1],
     type: LEAVE_TYPES.CASUAL,
     startDate: '2024-01-20',
@@ -92,7 +92,7 @@ const seedLeaves = [
   {
     employeeId: 'employee-3',
     employeeName: 'Sarah Davis',
-    employeeEmail: 'sarah.davis@hrcrm.com',
+    employeeEmail: 'sarah.davis@hrnova.com',
     department: DEPARTMENTS[6],
     type: LEAVE_TYPES.EARNED,
     startDate: '2024-02-01',
@@ -111,7 +111,7 @@ const seedAttendance = [
   {
     employeeId: 'employee-1',
     employeeName: 'Jane Smith',
-    employeeEmail: 'jane.smith@hrcrm.com',
+    employeeEmail: 'jane.smith@hrnova.com',
     department: DEPARTMENTS[0],
     date: '2024-01-08',
     checkIn: '2024-01-08T09:00:00Z',
@@ -124,7 +124,7 @@ const seedAttendance = [
   {
     employeeId: 'employee-1',
     employeeName: 'Jane Smith',
-    employeeEmail: 'jane.smith@hrcrm.com',
+    employeeEmail: 'jane.smith@hrnova.com',
     department: DEPARTMENTS[0],
     date: '2024-01-09',
     checkIn: '2024-01-09T09:15:00Z',
@@ -138,7 +138,7 @@ const seedAttendance = [
   {
     employeeId: 'employee-2',
     employeeName: 'Mike Johnson',
-    employeeEmail: 'mike.johnson@hrcrm.com',
+    employeeEmail: 'mike.johnson@hrnova.com',
     department: DEPARTMENTS[1],
     date: '2024-01-08',
     checkIn: '2024-01-08T08:45:00Z',
@@ -151,7 +151,7 @@ const seedAttendance = [
   {
     employeeId: 'employee-2',
     employeeName: 'Mike Johnson',
-    employeeEmail: 'mike.johnson@hrcrm.com',
+    employeeEmail: 'mike.johnson@hrnova.com',
     department: DEPARTMENTS[1],
     date: '2024-01-09',
     checkIn: '2024-01-09T09:00:00Z',
@@ -165,7 +165,7 @@ const seedAttendance = [
   {
     employeeId: 'employee-3',
     employeeName: 'Sarah Davis',
-    employeeEmail: 'sarah.davis@hrcrm.com',
+    employeeEmail: 'sarah.davis@hrnova.com',
     department: DEPARTMENTS[6],
     date: '2024-01-08',
     checkIn: '2024-01-08T09:00:00Z',
@@ -225,17 +225,17 @@ export const seedDatabase = async () => {
 // Demo user credentials for testing
 export const demoCredentials = {
   admin: {
-    email: 'admin@hrcrm.com',
+    email: 'admin@hrnova.com',
     password: 'admin123',
     role: USER_ROLES.ADMIN
   },
   manager: {
-    email: 'john.manager@hrcrm.com',
+    email: 'john.manager@hrnova.com',
     password: 'manager123',
     role: USER_ROLES.MANAGER
   },
   employee: {
-    email: 'jane.smith@hrcrm.com',
+    email: 'jane.smith@hrnova.com',
     password: 'employee123',
     role: USER_ROLES.EMPLOYEE
   }

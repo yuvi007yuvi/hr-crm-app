@@ -141,7 +141,7 @@ const Register = () => {
             Create Account
           </Typography>
           <Typography variant="body1" color="text.secondary">
-            Join the HR CRM platform
+            Join the HRNova platform
           </Typography>
         </Box>
 
