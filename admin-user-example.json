@@ -1,0 +1,12 @@
+{
+  "uid": "replace-with-actual-user-uid",
+  "email": "admin@yourcompany.com",
+  "firstName": "Admin",
+  "lastName": "User",
+  "role": "admin",
+  "department": "IT",
+  "joinDate": "2024-12-13T00:00:00.000Z",
+  "isActive": true,
+  "createdAt": "2024-12-13T00:00:00.000Z",
+  "updatedAt": "2024-12-13T00:00:00.000Z"
+}

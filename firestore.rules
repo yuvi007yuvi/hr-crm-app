@@ -1,0 +1,262 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ============= HELPER FUNCTIONS =============
+    
+    // Get user role from users collection
+    function getUserRole(uid) {
+      return get(/databases/$(database)/documents/users/$(uid)).data.role;
+    }
+
+    // Check if user is admin
+    function isAdmin(uid) {
+      return getUserRole(uid) == 'admin';
+    }
+
+    // Check if user is manager or admin
+    function isManagerOrAdmin(uid) {
+      let role = getUserRole(uid);
+      return role == 'admin' || role == 'manager';
+    }
+
+    // Check if user is active
+    function isActiveUser(uid) {
+      return get(/databases/$(database)/documents/users/$(uid)).data.isActive == true;
+    }
+
+    // Check if user owns the resource
+    function isOwner(uid, resourceUserId) {
+      return uid == resourceUserId;
+    }
+
+    // Validate required fields for user creation
+    function isValidUserData(data) {
+      return data.keys().hasAll(['email', 'firstName', 'lastName', 'role', 'department']) &&
+             data.email is string &&
+             data.firstName is string &&
+             data.lastName is string &&
+             data.role in ['admin', 'manager', 'employee'] &&
+             data.department is string;
+    }
+
+    // Validate leave request data
+    function isValidLeaveData(data) {
+      return data.keys().hasAll(['employeeId', 'type', 'startDate', 'endDate', 'days', 'reason']) &&
+             data.employeeId is string &&
+             data.type in ['sick', 'casual', 'earned', 'maternity', 'paternity'] &&
+             data.startDate is string &&
+             data.endDate is string &&
+             data.days is number &&
+             data.reason is string;
+    }
+
+    // Validate attendance data
+    function isValidAttendanceData(data) {
+      return data.keys().hasAll(['employeeId', 'date', 'status']) &&
+             data.employeeId is string &&
+             data.date is string &&
+             data.status in ['present', 'absent', 'late', 'half_day'];
+    }
+
+    // ============= COLLECTION RULES =============
+
+    // Users Collection
+    match /users/{userId} {
+      // Read rules
+      allow read: if request.auth != null && (
+        // Users can read their own profile
+        request.auth.uid == userId ||
+        // Admins can read any user
+        isAdmin(request.auth.uid) ||
+        // Managers can read employee profiles
+        isManagerOrAdmin(request.auth.uid)
+      );
+      
+      // Create rules
+      allow create: if request.auth != null &&
+        request.auth.uid == userId &&
+        isValidUserData(request.resource.data) &&
+        request.resource.data.uid == userId;
+      
+      // Update rules
+      allow update: if request.auth != null && (
+        // Users can update their own profile (except role)
+        (request.auth.uid == userId && 
+         !('role' in request.resource.data.diff(resource.data).affectedKeys())) ||
+        // Admins can update any user including role
+        isAdmin(request.auth.uid)
+      );
+      
+      // Delete rules
+      allow delete: if request.auth != null && isAdmin(request.auth.uid);
+    }
+
+    // Employees Collection (extended user profiles)
+    match /employees/{employeeId} {
+      // Read rules
+      allow read: if request.auth != null && isActiveUser(request.auth.uid);
+      
+      // Write rules
+      allow create, update: if request.auth != null && isManagerOrAdmin(request.auth.uid);
+      
+      // Delete rules
+      allow delete: if request.auth != null && isAdmin(request.auth.uid);
+    }
+
+    // Leaves Collection
+    match /leaves/{leaveId} {
+      // Read rules
+      allow read: if request.auth != null && (
+        // Users can read their own leave requests
+        resource.data.employeeId == request.auth.uid ||
+        // Managers and admins can read all leave requests
+        isManagerOrAdmin(request.auth.uid)
+      );
+      
+      // Create rules
+      allow create: if request.auth != null &&
+        isValidLeaveData(request.resource.data) && (
+          // Users can create their own leave requests
+          request.resource.data.employeeId == request.auth.uid ||
+          // Managers and admins can create leave requests for others
+          isManagerOrAdmin(request.auth.uid)
+        );
+      
+      // Update rules
+      allow update: if request.auth != null && (
+        // Users can update their own pending leave requests
+        (resource.data.employeeId == request.auth.uid && 
+         resource.data.status == 'pending') ||
+        // Managers and admins can update any leave request
+        isManagerOrAdmin(request.auth.uid)
+      );
+      
+      // Delete rules
+      allow delete: if request.auth != null && (
+        // Users can delete their own pending leave requests
+        (resource.data.employeeId == request.auth.uid && 
+         resource.data.status == 'pending') ||
+        // Admins can delete any leave request
+        isAdmin(request.auth.uid)
+      );
+    }
+
+    // Attendance Collection
+    match /attendance/{attendanceId} {
+      // Read rules
+      allow read: if request.auth != null && (
+        // Users can read their own attendance records
+        resource.data.employeeId == request.auth.uid ||
+        // Managers and admins can read all attendance records
+        isManagerOrAdmin(request.auth.uid)
+      );
+      
+      // Create rules
+      allow create: if request.auth != null &&
+        isValidAttendanceData(request.resource.data) && (
+          // Users can create their own attendance records
+          request.resource.data.employeeId == request.auth.uid ||
+          // Managers and admins can create attendance records for others
+          isManagerOrAdmin(request.auth.uid)
+        );
+      
+      // Update rules
+      allow update: if request.auth != null && (
+        // Users can update their own attendance records (limited window)
+        resource.data.employeeId == request.auth.uid ||
+        // Managers and admins can update any attendance record
+        isManagerOrAdmin(request.auth.uid)
+      );
+      
+      // Delete rules
+      allow delete: if request.auth != null && isAdmin(request.auth.uid);
+    }
+
+    // Departments Collection (reference data)
+    match /departments/{departmentId} {
+      // Read rules
+      allow read: if request.auth != null;
+      
+      // Write rules
+      allow create, update, delete: if request.auth != null && isAdmin(request.auth.uid);
+    }
+
+    // Leave Types Collection (reference data)
+    match /leaveTypes/{leaveTypeId} {
+      // Read rules
+      allow read: if request.auth != null;
+      
+      // Write rules
+      allow create, update, delete: if request.auth != null && isAdmin(request.auth.uid);
+    }
+
+    // Company Settings Collection
+    match /settings/{settingId} {
+      // Read rules
+      allow read: if request.auth != null && isManagerOrAdmin(request.auth.uid);
+      
+      // Write rules
+      allow create, update, delete: if request.auth != null && isAdmin(request.auth.uid);
+    }
+
+    // Notifications Collection
+    match /notifications/{notificationId} {
+      // Read rules
+      allow read: if request.auth != null && (
+        // Users can read their own notifications
+        resource.data.userId == request.auth.uid ||
+        // Admins can read all notifications
+        isAdmin(request.auth.uid)
+      );
+      
+      // Create rules
+      allow create: if request.auth != null && isManagerOrAdmin(request.auth.uid);
+      
+      // Update rules
+      allow update: if request.auth != null && (
+        // Users can mark their own notifications as read
+        resource.data.userId == request.auth.uid ||
+        // Admins can update any notification
+        isAdmin(request.auth.uid)
+      );
+      
+      // Delete rules
+      allow delete: if request.auth != null && (
+        // Users can delete their own notifications
+        resource.data.userId == request.auth.uid ||
+        // Admins can delete any notification
+        isAdmin(request.auth.uid)
+      );
+    }
+
+    // Reports Collection
+    match /reports/{reportId} {
+      // Read rules
+      allow read: if request.auth != null && isManagerOrAdmin(request.auth.uid);
+      
+      // Write rules
+      allow create, update, delete: if request.auth != null && isManagerOrAdmin(request.auth.uid);
+    }
+
+    // Audit Logs Collection (read-only for non-admins)
+    match /auditLogs/{logId} {
+      // Read rules
+      allow read: if request.auth != null && isAdmin(request.auth.uid);
+      
+      // Write rules (system generated)
+      allow create: if request.auth != null;
+      
+      // No updates or deletes allowed
+    }
+
+    // ============= SECURITY RULES =============
+    
+    // Deny all other access
+    match /{document=**} {
+      // Fallback rule - can be removed in production for stricter security
+      allow read, write: if false;
+    }
+  }
+}
